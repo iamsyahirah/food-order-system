@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('waitress_id');
             $table->unsignedBigInteger('cashier_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('waitress_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('cashier_id')->references('id')->on('users')->onDelete('cascade');
