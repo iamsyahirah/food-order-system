@@ -20,4 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/login', [AuthController::class, 'login']);
