@@ -29,6 +29,7 @@ class AuthController extends Controller
         unset($user->updated_at);
         unset($user->deleted_at);
 
+        $user->tokens()->delete();
         $token = $user->createToken('sanctum')->plainTextToken;
         $user->token = $token;
 
