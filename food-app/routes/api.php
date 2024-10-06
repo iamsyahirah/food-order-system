@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/auth/login', [AuthController::class, 'login']);
+Route::get('/auth/me', [AuthController::class, 'me'])->middleware(['auth:sanctum']);
 
 Route::post('/create-order', function () {
     return 'create-order';

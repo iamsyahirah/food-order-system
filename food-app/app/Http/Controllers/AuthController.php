@@ -34,7 +34,10 @@ class AuthController extends Controller
         $user->token = $token;
 
         return response(['data' => $user]);
+    }
 
-        //return $user->createToken('sanctum')->plainTextToken;
+    public function me()
+    {
+        return response(['data' => auth()->user()]);
     }
 }
