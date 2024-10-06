@@ -23,10 +23,17 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::get('/auth/me', [AuthController::class, 'me'])->middleware(['auth:sanctum']);
 
-Route::post('/create-order', function () {
-    return 'create-order';
-})->middleware(['auth:sanctum', 'ableCreateOrder']);
+Route::prefix('auth')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/me', [AuthController::class, 'me'])->middleware(['auth:sanctum']);
+});
 
-Route::post('/finish-order', function () {
-    return 'finish-order';
-})->middleware(['auth:sanctum', 'ableFinishOrder']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/create-order', function () {
+        return 'create-order';
+    })->middleware(['ableCreateOrder']);
+
+    Route::post('/finish-order', function () {
+        return 'finish-order';
+    })->middleware(['ableFinishOrder']);
+});
