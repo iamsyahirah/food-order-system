@@ -42,4 +42,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/user', [UserController::class, 'store'])->middleware(['ableCreateUser']);
 
     Route::post('/item', [ItemController::class, 'store'])->middleware(['ableCreateUpdateItem']);
+    Route::patch('/item/{id}', [ItemController::class, 'update'])->middleware(['ableCreateUpdateItem']);
 });
