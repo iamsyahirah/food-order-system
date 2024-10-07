@@ -26,7 +26,6 @@ class ItemController extends Controller
 
             Storage::disk('public')->putFileAs('items', $file, $newName);
             $request['image'] = $newName;
-
         }
 
         $item = Item::create($request->all());
@@ -41,6 +40,16 @@ class ItemController extends Controller
             'price' => 'required|integer',
             'image_file' => 'nullable|mimes:jpg,bmp,png',
         ]);
+
+        if ($request->file('image_file')) {
+            // process upload
+            $file = $request->file('image_file');
+            $fileName = $file->getClientOriginalName();
+            $newName = Carbon::now()->timestamp . '_' . $fileName;
+
+            Storage::disk('public')->putFileAs('items', $file, $newName);
+            $request['image'] = $newName;
+        }
 
         $item = Item::findOrFail($id);
         $item->update($request->all());
